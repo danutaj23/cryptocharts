@@ -30,6 +30,8 @@ conndb = sqlite3.connect(db_file)
 test = pd.read_sql('SELECT * FROM bitcoin ORDER BY last_updated DESC', conndb)
 conndb.close()
 
+app.title = 'CryptoChart'
+
 app.layout = html.Div([
     html.H2('Live Bitcoin Price',
             style={'textAlign': 'center', 'color': '#354B5E'}),
