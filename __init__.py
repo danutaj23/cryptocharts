@@ -31,11 +31,11 @@ test = pd.read_sql('SELECT * FROM bitcoin ORDER BY last_updated DESC', conndb)
 conndb.close()
 
 app.layout = html.Div([
-        html.H2('Live Cryptocurrency Price',
-                style={'textAlign': 'center', 'color': '#354B5E'}),
+    html.H2('Live Bitcoin Price',
+            style={'textAlign': 'center', 'color': '#354B5E'}),
 
     dcc.Graph(id='live-graph', animate=True),
-    dcc.Interval(id='graph-update', interval=10*1000)
+    dcc.Interval(id='graph-update', interval=1*1000)
 ])
 
 
@@ -56,8 +56,8 @@ def update_graph_scatter():
         name='Scatter',
         mode='lines+markers'
     )
-    return{'data': [data], 'layout': go.Layout(xaxis=dict(range=[min(X), max(X)]),
-                                               yaxis=dict(range=[min(Y), max(Y)]),)}
+    return{'data': [data], 'layout': go.Layout(xaxis={'range': [min(X), max(X)], 'title': 'Time'},
+                                               yaxis={'range': [min(Y), max(Y)], 'title': 'Value in USD'}), }
 
 
 #### PROD ####
