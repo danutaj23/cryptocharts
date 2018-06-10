@@ -31,9 +31,10 @@ app = dash.Dash(__name__)
 
 conndb = sqlite3.connect(db_file)
 currency_select = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table' ORDER BY 1 ASC", conndb)
+### Pytanie: czy potrzebne
 bitcoin_quotes = pd.read_sql("SELECT * FROM bitcoin ORDER BY last_updated DESC", conndb)
 available_crypto = currency_select['name'].unique()
-
+### Pytanie: czy potrzebne
 bitcoin_quotes['date'] = pd.to_datetime(bitcoin_quotes['last_updated'], unit='s', utc=True)
 
 
@@ -45,6 +46,11 @@ app.title = 'CryptoChart'
 app.layout = html.Div([
     html.H2('Live Bitcoin Price',
             style={'textAlign': 'center', 'color': '#354B5E'}),
+    html.Div([
+        dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value' : crypto} for crypto in available_crypto], value='bitcoin')
+            ],
+            style = {'width':'80%', 'display':'inline-block', 'margin':'2% 7% 2% %8'}),
+
 
     dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False}),
     dcc.Interval(id='graph-update', interval=2*1000)
@@ -52,11 +58,12 @@ app.layout = html.Div([
 
 
 @app.callback(Output('live-graph', 'figure'),
+              [Input(component_id='yaxis-column', component_property='value')],
               events=[Event('graph-update', 'interval')])
-def update_graph_scatter():
+def update_graph_scatter(selected_crypto):
     try:
         conndb = sqlite3.connect(db_file)
-        query = 'SELECT * FROM bitcoin ORDER BY last_updated DESC'
+        query = 'SELECT * FROM ' + selected_crypto + ' ORDER BY last_updated DESC'
         all_currencies_data = pd.read_sql(query, conndb)
         all_currencies_data.sort_values('last_updated', inplace=True)   # sortowanie wg czasu
         all_currencies_data['date'] = pd.to_datetime(all_currencies_data['last_updated'], unit='s', utc=True)  # zmiana timestampa na czas
