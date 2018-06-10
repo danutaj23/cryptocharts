@@ -29,9 +29,16 @@ else:
 db_file = config[server_type]['db_source']  # path to file
 app = dash.Dash(__name__)
 
-#conndb = sqlite3.connect(db_file)
-#test = pd.read_sql('SELECT * FROM bitcoin ORDER BY last_updated DESC', conndb)
-#conndb.close()
+conndb = sqlite3.connect(db_file)
+currency_select = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table' ORDER BY 1 ASC", conndb)
+bitcoin_quotes = pd.read_sql("SELECT * FROM bitcoin ORDER BY last_updated DESC", conndb)
+available_crypto = currency_select['name'].unique()
+
+bitcoin_quotes['date'] = pd.to_datetime(bitcoin_quotes['last_updated'], unit='s', utc=True)
+
+
+
+conndb.close()
 
 app.title = 'CryptoChart'
 
