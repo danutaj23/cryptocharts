@@ -47,14 +47,33 @@ app.layout = html.Div([
     html.H2('Live Cryptocurrency Price',
             style={'textAlign': 'center', 'color': '#354B5E'}),
     html.Div([
+        html.H3('Choose cryptocurrecy to show: '
+                )],
+            style={'width': '40%',
+                'display': 'inline-block',
+                'margin': '1% 1% 1% 1%',
+                'text-align': 'right',
+                'padding-bottom': '25px'}),
+
+    html.Div([
         dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value': crypto} for crypto in available_crypto], value='bitcoin')
             ],
-            style={'width': '80%', 'display': 'inline-block', 'margin': '2% 7% 2% 8%'}),
+            style={'width': '40%',
+                   'display': 'inline-block',
+                   'vertical-align': 'middle'}),
 
 
     dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False}),
-    dcc.Interval(id='graph-update', interval=2*1000)
-])
+    dcc.Interval(id='graph-update', interval=30*1000)
+
+],
+style={'backgroundColor': '#FFFEFE',
+       'fontFamily': 'Calibri',
+       'color': '#354B5E',
+       'width': '84%',
+       'marginLeft': 'auto',
+       'marginRight': 'auto'}
+)
 
 
 @app.callback(Output('live-graph', 'figure'),
