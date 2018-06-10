@@ -39,7 +39,7 @@ app.layout = html.Div([
     html.H2('Live Bitcoin Price',
             style={'textAlign': 'center', 'color': '#354B5E'}),
 
-    dcc.Graph(id='live-graph', animate=True),
+    dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False}),
     dcc.Interval(id='graph-update', interval=2*1000)
 ])
 
