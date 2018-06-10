@@ -11,6 +11,7 @@ import pandas as pd
 import datetime
 import time
 import configparser
+import base64
 
 ###CONFIG PART
 config = configparser.ConfigParser()
@@ -41,13 +42,24 @@ bitcoin_quotes['date'] = pd.to_datetime(bitcoin_quotes['last_updated'], unit='s'
 
 conndb.close()
 
+image_filename = 'logo.png'
+encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+
 app.title = 'CryptoChart'
 
 app.layout = html.Div([
+    html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode()),
+             style={
+                 'position': 'absolute',
+                 'zIndex': '0',
+                 'left': '0px,',
+                 'top': '0px',
+                 'width': '80px'
+}),
     html.H2('Live Cryptocurrency Price',
             style={'textAlign': 'center', 'color': '#354B5E'}),
     html.Div([
-        html.H3('Choose cryptocurrecy to show: '
+        html.H3('Choose cryptocurrecy to display: '
                 )],
             style={'width': '40%',
                 'display': 'inline-block',
