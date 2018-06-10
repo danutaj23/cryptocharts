@@ -59,7 +59,7 @@ app.layout = html.Div([
     html.H2('Live Cryptocurrency Price',
             style={'textAlign': 'center', 'color': '#354B5E'}),
     html.Div([
-        html.H3('Choose cryptocurrecy to display: '
+        html.H3('Choose cryptocurrency to display: '
                 )],
             style={'width': '40%',
                 'display': 'inline-block',
