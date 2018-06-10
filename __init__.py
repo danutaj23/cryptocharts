@@ -53,7 +53,7 @@ app.layout = html.Div([
                  'position': 'absolute',
                  'zIndex': '0',
                  'left': '0px,',
-                 'top': '0px',
+                 'top': '5px',
                  'width': '80px'
 }),
     html.H2('Live Cryptocurrency Price',
@@ -65,7 +65,8 @@ app.layout = html.Div([
                 'display': 'inline-block',
                 'margin': '1% 1% 1% 1%',
                 'text-align': 'right',
-                'padding-bottom': '25px'}),
+                'vertical-align': 'middle'
+                }),
 
     html.Div([
         dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value': crypto} for crypto in available_crypto], value='bitcoin')
