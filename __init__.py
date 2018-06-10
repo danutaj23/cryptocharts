@@ -44,12 +44,12 @@ conndb.close()
 app.title = 'CryptoChart'
 
 app.layout = html.Div([
-    html.H2('Live Bitcoin Price',
+    html.H2('Live Cryptocurrency Price',
             style={'textAlign': 'center', 'color': '#354B5E'}),
     html.Div([
-        dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value' : crypto} for crypto in available_crypto], value='bitcoin')
+        dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value': crypto} for crypto in available_crypto], value='bitcoin')
             ],
-            style = {'width':'80%', 'display':'inline-block', 'margin':'2% 7% 2% %8'}),
+            style={'width': '80%', 'display': 'inline-block', 'margin': '2% 7% 2% 8%'}),
 
 
     dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False}),
