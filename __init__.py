@@ -27,7 +27,8 @@ else:
         error_log.write('\n')
         error_log.close()
 
-db_file = config[server_type]['db_source']  # path to file
+db_file = config[server_type]['db_source']  # path to DB file
+img_folder = config[server_type]['img_source']
 app = dash.Dash(__name__)
 
 conndb = sqlite3.connect(db_file)
@@ -42,7 +43,7 @@ bitcoin_quotes['date'] = pd.to_datetime(bitcoin_quotes['last_updated'], unit='s'
 
 conndb.close()
 
-image_filename = 'logo.png'
+image_filename = img_folder + 'logo.png'
 encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 app.title = 'CryptoChart'
