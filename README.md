@@ -1,5 +1,3 @@
-**
-
 Aplikacja “Cryptocharts”
 =============================
 **Product Owner**
@@ -68,6 +66,8 @@ Wykres liniowy jest najczęściej występującym wykresem w analizach ekonomiczn
 Program oferuje podstawową funkcjonalność w postaci notowań stu kryptowalut na wykresie liniowym, na przestrzeni ostatnich 500 minut w interwale 5 minutowym.
 
 ***2.  Wybór kryptowaluty***
+
 Aplikacja daje możliwość analizy notowań dla stu najpopularniejszych kryptowalut.
 ![enter image description here](https://lh3.googleusercontent.com/RAr_QK1rsTalHMxXPdH_fNiTIjXbRANpRT4-6MP67EiQR9GDmJamI6yjW256DG-ot5QHYpy1q2jN)
+
 Użytkownik ma możliwość wyboru interesującej go kryptowaluty z rozwijanej listy nad wykresem.
