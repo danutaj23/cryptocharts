@@ -96,8 +96,9 @@ app.layout = html.Div(children=[
         dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False})
         ],),
     dcc.Interval(id='graph-update', interval=30*1000),
-    html.Div([html.Div('Średnia cena dolara: '+ str(usd_price()[0]) +'PLN'),
+    html.Div([html.Div('Średnia cena dolara: '+ str(usd_price()[0]) +' PLN'),
               html.Div(' Według kursu NBP z dnia: ' +str(usd_price()[1]))],
+        style={'text-align': 'center', 'font-weight': 'bold'}
              ),
     html.Div([
          html.H3("[Baza wiedzy] Abc kryptowalut"),
@@ -165,6 +166,8 @@ def update_graph_scatter(selected_crypto):
         all_currencies_data = pd.read_sql(query, conndb)
         all_currencies_data.sort_values('last_updated', inplace=True)   # sortowanie wg czasu
         all_currencies_data['date'] = pd.to_datetime(all_currencies_data['last_updated'], unit='s', utc=True)  # zmiana timestampa na czas
+        all_currencies_data['date'] = all_currencies_data['date'] + pd.Timedelta('02:00:00')
+        #all_currencies_data['date'] = all_currencies_data['date'].tz_convert('Asia/Kolkata')
         all_currencies_data.set_index('date', inplace=True)
         X = all_currencies_data.index[-100:]
         Y = all_currencies_data.price_usd.values[-100:]
@@ -174,7 +177,7 @@ def update_graph_scatter(selected_crypto):
             name='Scatter',
             mode='lines+markers'
         )
-        return{'data': [data], 'layout': go.Layout(xaxis={'range': [min(X), max(X)], 'title': 'Czas'},
+        return{'data': [data], 'layout': go.Layout(xaxis={'range': [min(X), max(X)], 'title': 'Czas'},#, 'tickformat': '%m/%d:%H'},https://community.plot.ly/t/how-to-make-the-messy-date-ticks-organized/7477/3
                                                    yaxis={'range': [min(Y), max(Y)], 'title': 'Wartość w $'}), }
     except Exception as e:
         with open('errors.txt', 'a') as error_log:
