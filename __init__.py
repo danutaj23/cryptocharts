@@ -99,6 +99,51 @@ app.layout = html.Div(children=[
     html.Div([html.Div('Średnia cena dolara: '+ str(usd_price()[0]) +'PLN'),
               html.Div(' Według kursu NBP z dnia: ' +str(usd_price()[1]))],
              ),
+    html.Div([
+         html.H3("[Baza wiedzy] Abc kryptowalut"),
+         html.P('Kryptowaluta jest środkiem wymiany jak normalne waluty typu dolar, jednak skonstruowana na potrzeby '
+                'wymiany informacji poprzez proces używający określonych zasad z kryptografii. Kryptografia pozwala '
+                'zabezpieczyć te transakcje i tworzenie nowych jednostek waluty. Pierwsza kryptowaluta czyli Bitcoin '
+                'była stworzona w 2009 roku.',
+               className='article',
+               id='regulations'),
+         html.A("Czytaj więcej",
+                href='https://businessinsider.com.pl/finanse/kryptowaluty/czym-sa-bitcoiny-i-kryptowaluty/05f5ned',
+                target='blank')
+         ],
+         style={"width": "25%",
+                "margin": "2% 4%",
+                "display": "inline-block"}),
+     html.Div([
+         html.H3("[Prawo] Legalne środowisko wokół Bitcoina"),
+         html.P('Wraz z wzostem popytu na kryptowaluty, globalni regulatorzy są podzieleni jak za tym nadążyć. '
+                'W Większości kryptowaluty nie są wspierane przez rządy, co znaczy, że każdy kraj ma inne standardy. '
+                'W tym artykule przeczytasz jak w regulatorzy i rządy radzą sobie z tym problemem.',
+               className='article',
+               id='regulations'),
+         html.A("Czytaj więcej po angielsku",
+                href='https://www.cnbc.com/2018/03/27/a-complete-guide-to-cyprocurrency-regulations-around-the-world.html',
+                target='blank')
+         ],
+         style={"width": "25%",
+                "margin": "2% 4%",
+                "display": "inline-block"}),
+     html.Div([
+         html.H3("[Opinie] W co inwestować?"),
+         html.P('Rynek finansowy zmienia się, wielu ludzi uświadomiło to sobie w momencie gdy Bitcoin i inne '
+                'kryptowaluty stały się gorącym tematem. Teraz gdy jesteśmy w roku 2018 możemy bezpiecznie powiedzieć, '
+                'że kryptowaluty są mocniejsze niż kiedykolwiek. Pośród mniej znanych największymi zwycięzcami są m.in. '
+                'Stellar Lumens, IOTA, EOS.',
+               className='article',
+               id='regulations'),
+         html.A("Czytaj więcej po angielsku",
+                href='https://www.mineweb.net/best-cryptocurrency-to-invest-in-2018',
+                target='blank')
+         ],
+         style={"width": "25%",
+                "margin": "2% 4%",
+                "display": "inline-block",
+                'vertical-align': 'top'}),
 
 ],
 style={'backgroundColor': '#FFFEFE',
