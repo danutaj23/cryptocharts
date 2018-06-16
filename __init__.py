@@ -57,10 +57,10 @@ app.layout = html.Div([
                  'top': '5px',
                  'width': '80px'
 }),
-    html.H2('Live Cryptocurrency Price',
+    html.H2('Ceny kryptowalut',
             style={'textAlign': 'center', 'color': '#354B5E'}),
     html.Div([
-        html.H3('Choose cryptocurrency to display: '
+        html.H3('Wybierz kryptowalutę '
                 )],
             style={'width': '40%',
                 'display': 'inline-block',
@@ -109,8 +109,8 @@ def update_graph_scatter(selected_crypto):
             name='Scatter',
             mode='lines+markers'
         )
-        return{'data': [data], 'layout': go.Layout(xaxis={'range': [min(X), max(X)], 'title': 'Time'},
-                                                   yaxis={'range': [min(Y), max(Y)], 'title': 'Value in USD'}), }
+        return{'data': [data], 'layout': go.Layout(xaxis={'range': [min(X), max(X)], 'title': 'Czas'},
+                                                   yaxis={'range': [min(Y), max(Y)], 'title': 'Wartość w $'}), }
     except Exception as e:
         with open('errors.txt', 'a') as error_log:
             error_log.write(str(datetime.datetime.fromtimestamp(time.time())) + ': ' + str(e))
