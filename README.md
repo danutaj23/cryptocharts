@@ -2,18 +2,18 @@ Aplikacja “Cryptocharts”
 =============================
 **Product Owner**
 
--   Patryk Ellerik
+-   Patryk Ellerik - programista / product owner
     
 
 **Członkowie zespołu**
 
 -   Tomasz Nowak - główny programista
     
--   Danuta Kłos - tester
+-   Danuta Kłos - programista / tester
     
--   Witek Ruciński
+-   Witek Ruciński - programista / bazy danych
     
--   Michał Wiśniewski
+-   Michał Wiśniewski - programista / dokumentacja
     
 
 **Środowisko programistyczne:** PyCharm
