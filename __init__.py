@@ -45,6 +45,7 @@ currency_select = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'
 ### Pytanie: czy potrzebne
 bitcoin_quotes = pd.read_sql("SELECT * FROM bitcoin ORDER BY last_updated DESC", conndb)
 available_crypto = currency_select['name'].unique()
+
 ### Pytanie: czy potrzebne
 bitcoin_quotes['date'] = pd.to_datetime(bitcoin_quotes['last_updated'], unit='s', utc=True)
 
@@ -85,10 +86,10 @@ app.layout = html.Div(children=[
                    'display': 'inline-block',
                    'vertical-align': 'middle'}),
     html.Div([html.H3(id='nbp_usd_price')],
-             style={'width': '30%',
+             style={'width': '20%',
                     'display': 'inline-block',
                     'margin': '1% 1% 1% 2%',
-                    'text-align': 'left',
+                    'text-align': 'right',
                     'vertical-align': 'middle'
                     }),
 
@@ -164,7 +165,7 @@ def update_graph_scatter(selected_crypto):
         conndb = sqlite3.connect(db_file)
         query = 'SELECT * FROM ' + selected_crypto + ' ORDER BY last_updated DESC'
         all_currencies_data = pd.read_sql(query, conndb)
-        all_currencies_data.sort_values('last_updated', inplace=True)   # sortowanie wg czasu
+        all_currencies_data.sort_values('last_updated', inplace=True)   # sortowanie wg czasu ## TODO do sprawdzenia czy jest wymagane
         all_currencies_data['date'] = pd.to_datetime(all_currencies_data['last_updated'], unit='s', utc=True)  # zmiana timestampa na czas
         all_currencies_data['date'] = all_currencies_data['date'] + pd.Timedelta('02:00:00')
         #all_currencies_data['date'] = all_currencies_data['date'].tz_convert('Asia/Kolkata')
@@ -196,7 +197,7 @@ def update_value(cryptocurrency):
     data = c.fetchall()
     c.close()
     conn.close()
-    return 'Aktualny kurs: {} $'.format(data[0][0])
+    return 'Aktualny kurs: {} $, {} PLN'.format(round(data[0][0],3), round(data[0][0]*usd_price()[0], 3))
 
 #### PROD ####
 if server_type == 'PROD':
