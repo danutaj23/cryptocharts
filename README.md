@@ -70,7 +70,11 @@ Przy wyborze interesującej kryptowaluty użytkownik w bardzo szybko otrzymuje i
 
 ![enter image description here](https://lh3.googleusercontent.com/JNo1tM6Q3si-IDwuTKFzUaGK3P6Gkogcmy8Ojf4Ln3F0njJtpeY4_ICr09opj2PtW7axdI5KNgM)
 
-***3. Notowania dolara***
+Na wykresie użytkownik ma możliwość podświetlenia konkretnego punktu czasowego, który pokazuje dokładną datę notowania wraz z wartością.
+
+![enter image description here](https://lh3.googleusercontent.com/lvCrQt4XLRBjf7JzFx_eKmE_TF0HFf0WICcg3Gy6vdSqmUAuGYAuU0Ilux9ufibgBoihOQGKSfI)
+
+***3. Bierzący kurs dolara***
 	
 Aby polski użytkownik miał możliwość lepszego zobrazowania wartości kryptowalut, aplikacja daje możliwość podglądu średniego kursu dolara w złotówkach.
 	
@@ -83,7 +87,3 @@ Transakcje na rynku kryptowalut zawierane są za pośrednictwem dolarów, jednak
 Aplikacja zapewnia wsparcie merytoryczne dla użytkownika. Ma on możliwość uzyskania szczegółowej wiedzy na temat kryptowalut - czym są, jakie są regulacje prawne na świecie oraz jakie są opinie środowisk ekonomicznych na ich temat.
 	
 ![enter image description here](https://lh3.googleusercontent.com/g9_8dbfbXxlBCAjdUiAvNYVkpPog4XA8l8-uRgLaHpsydCjsjPnrBwS3ocl1uahFPuakuUtEu9c)
-
-Na wykresie użytkownik ma możliwość podświetlenia konkretnego punktu czasowego, który pokazuje dokładną datę notowania wraz z wartością.
-
-![enter image description here](https://lh3.googleusercontent.com/lvCrQt4XLRBjf7JzFx_eKmE_TF0HFf0WICcg3Gy6vdSqmUAuGYAuU0Ilux9ufibgBoihOQGKSfI)
