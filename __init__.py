@@ -28,8 +28,17 @@ else:
         error_log.close()
 
 db_file = config[server_type]['db_source']  # path to DB file
+db_nbp_source = config[server_type]['db_nbp_source']  # path to DB file
 img_folder = config[server_type]['img_source']
 app = dash.Dash(__name__)
+
+def usd_price():
+    conn = sqlite3.connect(db_nbp_source)
+    usd_price = pd.read_sql("SELECT * FROM usd_pln ORDER BY 1 DESC LIMIT 1", conn)
+    conn.close()
+    price = float(usd_price['value'])
+    current_date = str(usd_price['date'][0])
+    return price, current_date
 
 conndb = sqlite3.connect(db_file)
 currency_select = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table' ORDER BY 1 ASC", conndb)
@@ -48,7 +57,7 @@ encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 app.title = 'CryptoChart'
 
-app.layout = html.Div([
+app.layout = html.Div(children=[
     html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode()),
              style={
                  'position': 'absolute',
@@ -62,7 +71,7 @@ app.layout = html.Div([
     html.Div([
         html.H3('Wybierz kryptowalutę '
                 )],
-            style={'width': '40%',
+            style={'width': '30%',
                 'display': 'inline-block',
                 'margin': '1% 1% 1% 1%',
                 'text-align': 'right',
@@ -72,9 +81,16 @@ app.layout = html.Div([
     html.Div([
         dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value': crypto} for crypto in available_crypto], value='bitcoin')
             ],
-            style={'width': '40%',
+            style={'width': '30%',
                    'display': 'inline-block',
                    'vertical-align': 'middle'}),
+    html.Div([html.H3(id='nbp_usd_price')],
+             style={'width': '30%',
+                    'display': 'inline-block',
+                    'margin': '1% 1% 1% 2%',
+                    'text-align': 'left',
+                    'vertical-align': 'middle'
+                    }),
 
 
     dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False}),
@@ -117,7 +133,18 @@ def update_graph_scatter(selected_crypto):
             error_log.write('\n')
             error_log.close()
 
-
+@app.callback(
+    Output(component_id='nbp_usd_price', component_property='children'),
+    [Input(component_id='yaxis-column', component_property='value')]
+)
+def update_value(cryptocurrency):
+    conn = sqlite3.connect(db_file)
+    c = conn.cursor()
+    c.execute("SELECT price_usd FROM " + cryptocurrency + " ORDER BY last_updated DESC limit 1")
+    data = c.fetchall()
+    c.close()
+    conn.close()
+    return 'Aktualny kurs: {} $'.format(data[0][0])
 
 #### PROD ####
 if server_type == 'PROD':
