@@ -1,4 +1,4 @@
-Aplikacja “Cryptocharts”
+Aplikacja “CryptoChart”
 =============================
 **Product Owner**
 
@@ -55,7 +55,7 @@ Wykres przedstawia zmiany wartości wybranej przez użytkownika kryptowaluty. Wy
 
 Wykres liniowy jest najczęściej występującym wykresem w analizach ekonomicznych i giełdowych. Najważniejszą jego zaletą jest intuicyjna postać prezentacji danych względem analizowanych okresów czasu.
 
-![enter image description here](https://lh3.googleusercontent.com/WzR8evm0jeoNBj1fgkgWPgMVdX6vXWrRJzVjhWjDakkfjsZ3g9YRPveNJNjAmvGJSJT4XlqDZDc)
+![enter image description here](https://lh3.googleusercontent.com/md27TMTjlCuOu2Fs31Pq8HERY7FjMNLMSMZldSMT6u_HdCKgBqwxUFWMNA-s7dgQbU5IZn-iAoo)
 
 Program oferuje podstawową funkcjonalność w postaci notowań stu kryptowalut na wykresie liniowym, na przestrzeni ostatnich 500 minut w interwale 5 minutowym.
 
@@ -63,22 +63,22 @@ Program oferuje podstawową funkcjonalność w postaci notowań stu kryptowalut 
 
 Aplikacja daje możliwość analizy notowań dla stu najpopularniejszych kryptowalut.
 
-![enter image description here](https://lh3.googleusercontent.com/XkStySSp9jxshb5s_SuLRWq2vfd9h5nHa51S7xLZq5cLr0FmnstcnfpQkTcn0nc21DufKX8mrmc)
+![enter image description here](https://lh3.googleusercontent.com/OQP22k8ZJak2fxUGgVCzEendxWzWGFh1vjzzQdCB9ois8HanAqbkv54tBfsprJCR8Jqj0eGIHXg)
 
 Użutkownik może wybrać z rozwijanej listy interesującą go kryptowalutę.
-Przy wyborze interesującej kryptowaluty użytkownik w bardzo szybko otrzymuje informację o bieżącej cenie wybranej przez siebie kryptowaluty:
+Przy wyborze interesującej kryptowaluty użytkownik w bardzo szybko otrzymuje informację o bieżącej cenie wybranej przez siebie kryptowaluty zarówno w dolarach jak i w złotówkach:
 
-![enter image description here](https://lh3.googleusercontent.com/JNo1tM6Q3si-IDwuTKFzUaGK3P6Gkogcmy8Ojf4Ln3F0njJtpeY4_ICr09opj2PtW7axdI5KNgM)
+![enter image description here](https://lh3.googleusercontent.com/WjeVItCusoKkk_hbgxBL0g9kNcVfkc91QFxQTX6e2lyQVTQCqi5h8UExw7CO4gcUg_kivDoEm6Q)
 
 Na wykresie użytkownik ma możliwość podświetlenia konkretnego punktu czasowego, który pokazuje dokładną datę notowania wraz z wartością.
 
-![enter image description here](https://lh3.googleusercontent.com/lvCrQt4XLRBjf7JzFx_eKmE_TF0HFf0WICcg3Gy6vdSqmUAuGYAuU0Ilux9ufibgBoihOQGKSfI)
+![enter image description here](https://lh3.googleusercontent.com/6PDMIjieVR5XTZxg22UbPpQV7HvVorwCqxYUumCZWocdOfOrtHfPutZNVF__xs6BydrnYSR0kZQ)
 
-***3. Bierzący kurs dolara***
+***3. Bieżący kurs dolara***
 	
 Aby polski użytkownik miał możliwość lepszego zobrazowania wartości kryptowalut, aplikacja daje możliwość podglądu średniego kursu dolara w złotówkach.
 	
-![enter image description here](https://lh3.googleusercontent.com/UAJAsfrjpXpWfC2HB98CVzLUvvk3LFi_74U8v0i2nu3ykb0yUebc8cGYCnCnCf3kW0fWnIKRSFw)
+![enter image description here](https://lh3.googleusercontent.com/suBript6b1IpMdwziCatg8j-ZSGNpjJ7ZKiphrcU0VKtPaTiFmGfZpKdFBYVAQFlrqUhjgzB1I4)
 
 Transakcje na rynku kryptowalut zawierane są za pośrednictwem dolarów, jednak aby mieć pełen obraz potencjalnej inwestycji, użytkownik otrzymuje możliwość przeliczenia bieżącego kursu.
 
@@ -86,4 +86,4 @@ Transakcje na rynku kryptowalut zawierane są za pośrednictwem dolarów, jednak
 
 Aplikacja zapewnia wsparcie merytoryczne dla użytkownika. Ma on możliwość uzyskania szczegółowej wiedzy na temat kryptowalut - czym są, jakie są regulacje prawne na świecie oraz jakie są opinie środowisk ekonomicznych na ich temat.
 	
-![enter image description here](https://lh3.googleusercontent.com/g9_8dbfbXxlBCAjdUiAvNYVkpPog4XA8l8-uRgLaHpsydCjsjPnrBwS3ocl1uahFPuakuUtEu9c)
+![enter image description here](https://lh3.googleusercontent.com/JG7v_Vq1CQtGyn3g5f6kaKmiH8YeOV7Sym6Q_3Lwl0tK2ajH545xzxxgg06pzKFddcQQ16fRB9o)
