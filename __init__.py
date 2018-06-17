@@ -130,7 +130,15 @@ app.layout = html.Div(children=[
         ],),
     dcc.Interval(id='graph-update', interval=30*1000),
     html.Div([
-
+        html.H3('Wybierz okres '
+                )],
+        style={'width': '35%',
+               'display': 'inline-block',
+               'margin': '1% 1% 1% 1%',
+               'text-align': 'right',
+               'vertical-align': 'middle'
+               }),
+    html.Div([
         dcc.Dropdown(
             id='time-offset',
             options=[
@@ -140,12 +148,13 @@ app.layout = html.Div(children=[
                 {'label': '1 tydzień', 'value': 'week'},
                 {'label': '1 miesiąc', 'value': 'month'},
             ],
-            value='hour',
+            value='day',
             clearable=False,
         )
     ],
         style={"width": "35%",
-               "margin": "2% 8% 2% 7%"}),
+               "display": "inline-block",
+               'vertical-align': 'middle'}),
     html.Div([html.Div('Średnia cena dolara: '+ str(usd_price()[0]) +' PLN'),
               html.Div(' Według kursu NBP z dnia: ' +str(usd_price()[1]))],
         style={'text-align': 'center', 'font-weight': 'bold'}
@@ -284,13 +293,15 @@ def update_graph_scatter(selected_crypto1, selected_crypto2, date_scope):
             xaxis=dict(range=[min(X1), max(X1)]),
             yaxis=dict(range=[min(Y1), max(Y1)], title='Cena ' + str(currency_name1['name'][0])),
             yaxis2=dict(range=[min(Y2), max(Y2)], title='Cena ' + str(currency_name2['name'][0]), overlaying='y', side='right'),
-            margin={'l': 70, 'b': 35, 't': 30, 'r': 50},
+            margin={'l': 60, 'b': 45, 't': 45, 'r': 60, 'pad': 13},
+            legend={'orientation': 'h', 'x': 0.40, 'y': 1.1, 'xanchor': 'left', 'yanchor': 'top'}
         )}
     elif (selected_crypto1 and not selected_crypto2):
         return {'data': [data1], 'layout': go.Layout(
             xaxis=dict(range=[min(X1), max(X1)]),
             yaxis=dict(range=[min(Y1), max(Y1)], title='Cena ' + str(currency_name1['name'][0])),
-            margin={'l': 70, 'b': 35, 't': 30, 'r': 50},
+            margin={'l': 60, 'b': 45, 't': 45, 'r': 60, 'pad': 13},
+            legend={'orientation': 'h', 'x': 0.40, 'y': 1.1, 'xanchor': 'left', 'yanchor': 'top'}
         )}
 
 @app.callback(
