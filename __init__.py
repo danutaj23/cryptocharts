@@ -196,51 +196,49 @@ def update_graph_scatter(selected_crypto1, selected_crypto2, date_scope):
     offset = offsets[date_scope]
     conn = sqlite3.connect(db_file)
     query1 = "SELECT * FROM " + selected_crypto1 + " ORDER BY last_updated DESC"
-    query2 = "SELECT * FROM " + selected_crypto2 + " ORDER BY last_updated DESC"
     query_name1 = "SELECT name FROM " + selected_crypto1 + " LIMIT 1"
-    query_name2 = "SELECT name FROM " + selected_crypto2 + " LIMIT 1"
     all_currencies_data1 = pd.read_sql(query1, conn)
-    all_currencies_data2 = pd.read_sql(query2, conn)
     currency_name1 = pd.read_sql(query_name1, conn)
-    currency_name2 = pd.read_sql(query_name2, conn)
-    all_currencies_data1.sort_values('last_updated', inplace=True) # sortowanie danych wg. czasu
-    all_currencies_data2.sort_values('last_updated', inplace=True) # sortowanie danych wg. czasu
+    all_currencies_data1.sort_values('last_updated', inplace=True)  # sortowanie danych wg. czasu
     updates_times1 = all_currencies_data1['last_updated']
-    updates_times2 = all_currencies_data2['last_updated']
     oldest_record1 = updates_times1.max() - offset if updates_times1.max() - offset > updates_times1.min() else updates_times1.min()
-    oldest_record2 = updates_times2.max() - offset if updates_times2.max() - offset > updates_times2.min() else updates_times2.min()
-
     scoped_currencies1 = all_currencies_data1.loc[all_currencies_data1['last_updated'] > oldest_record1]
-    scoped_currencies2 = all_currencies_data2.loc[all_currencies_data2['last_updated'] > oldest_record2]
-    scoped_currencies1['date'] = pd.to_datetime(updates_times1, unit='s', utc=True) #zamiana unix_na datę-czas
-    scoped_currencies2['date'] = pd.to_datetime(updates_times2, unit='s', utc=True) #zamiana unix_na datę-czas
-
-    scoped_currencies1.set_index('date', inplace=True) #dodanie lidexu na datę-czas
-    scoped_currencies2.set_index('date', inplace=True) #dodanie lidexu na datę-czas
-    X = scoped_currencies1.index
-    X1 = scoped_currencies2.index
-    Y = scoped_currencies1.price_usd.values
-    Y1 = scoped_currencies2.price_usd.values
-
-    data = plotly.graph_objs.Scatter(
-        x=X,
-        y=Y,
-        name=str(currency_name1['name'][0]),
-        mode='lines+markers'
-    )
+    scoped_currencies1['date'] = pd.to_datetime(updates_times1, unit='s', utc=True)  # zamiana unix_na datę-czas
+    scoped_currencies1.set_index('date', inplace=True)  # dodanie lidexu na datę-czas
+    X1 = scoped_currencies1.index
+    Y1 = scoped_currencies1.price_usd.values
     data1 = plotly.graph_objs.Scatter(
         x=X1,
         y=Y1,
+        name=str(currency_name1['name'][0]),
+        mode='lines+markers'
+    )
+    query2 = "SELECT * FROM " + selected_crypto2 + " ORDER BY last_updated DESC"
+    query_name2 = "SELECT name FROM " + selected_crypto2 + " LIMIT 1"
+    all_currencies_data2 = pd.read_sql(query2, conn)
+    currency_name2 = pd.read_sql(query_name2, conn)
+    all_currencies_data2.sort_values('last_updated', inplace=True) # sortowanie danych wg. czasu
+    updates_times2 = all_currencies_data2['last_updated']
+    oldest_record2 = updates_times2.max() - offset if updates_times2.max() - offset > updates_times2.min() else updates_times2.min()
+    conn.close()
+    scoped_currencies2 = all_currencies_data2.loc[all_currencies_data2['last_updated'] > oldest_record2]
+    scoped_currencies2['date'] = pd.to_datetime(updates_times2, unit='s', utc=True) #zamiana unix_na datę-czas
+    scoped_currencies2.set_index('date', inplace=True) #dodanie lidexu na datę-czas
+    X2 = scoped_currencies2.index
+    Y2 = scoped_currencies2.price_usd.values
+    data2 = plotly.graph_objs.Scatter(
+        x=X2,
+        y=Y2,
         name=str(currency_name2['name'][0]),
         mode='lines+markers',
         yaxis='y2'
     )
 
-    return {'data': [data, data1], 'layout': go.Layout(
-        xaxis=dict(range=[min(X), max(X)]),
+    return {'data': [data1, data2], 'layout': go.Layout(
+        xaxis=dict(range=[min(X1), max(X1)]),
         #yaxis=dict(range=[min(min(Y),min(Y1)), max(max(Y),max(Y1))], title='price'),
-        yaxis=dict(range=[min(Y), max(Y)], title='Cena ' + str(currency_name1['name'][0])),
-        yaxis2=dict(range=[min(Y1), max(Y1)], title='Cena ' + str(currency_name1['name'][0]), overlaying='y', side='right'),
+        yaxis=dict(range=[min(Y1), max(Y1)], title='Cena ' + str(currency_name1['name'][0])),
+        yaxis2=dict(range=[min(Y2), max(Y2)], title='Cena ' + str(currency_name2['name'][0]), overlaying='y', side='right'),
         margin={'l': 70, 'b': 35, 't': 30, 'r': 50},
     )}
 
