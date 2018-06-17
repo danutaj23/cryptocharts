@@ -293,14 +293,14 @@ def update_graph_scatter(selected_crypto1, selected_crypto2, date_scope):
             xaxis=dict(range=[min(X1), max(X1)]),
             yaxis=dict(range=[min(Y1)*0.998, max(Y1)*1.002], title='Cena ' + str(currency_name1['name'][0])),
             yaxis2=dict(range=[min(Y2)*0.998, max(Y2)*1.002], title='Cena ' + str(currency_name2['name'][0]), overlaying='y', side='right'),
-            margin={'l': 60, 'b': 45, 't': 45, 'r': 60, 'pad': 13},
+            margin={'l': 60, 'b': 45, 't': 45, 'r': 60, 'pad': 9},
             legend={'orientation': 'h', 'x': 0.40, 'y': 1.1, 'xanchor': 'left', 'yanchor': 'top'}
         )}
     elif (selected_crypto1 and not selected_crypto2):
         return {'data': [data1], 'layout': go.Layout(
             xaxis=dict(range=[min(X1), max(X1)]),
             yaxis=dict(range=[min(Y1)*0.998, max(Y1)*1.002], title='Cena ' + str(currency_name1['name'][0])),
-            margin={'l': 60, 'b': 45, 't': 45, 'r': 60, 'pad': 13},
+            margin={'l': 60, 'b': 45, 't': 45, 'r': 60, 'pad': 9},
             legend={'orientation': 'h', 'x': 0.40, 'y': 1.1, 'xanchor': 'left', 'yanchor': 'top'}
         )}
 
