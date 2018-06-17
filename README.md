@@ -1,4 +1,4 @@
-Aplikacja “CryptoChart”
+Aplikacja “CryptoCharts”
 =============================
 **Product Owner**
 

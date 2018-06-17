@@ -59,7 +59,7 @@ conndb.close()
 image_filename = img_folder + 'logo.png'
 encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
-app.title = 'CryptoChart'
+app.title = 'CryptoCharts'
 
 app.layout = html.Div(children=[
     html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode()),
