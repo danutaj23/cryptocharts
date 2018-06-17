@@ -45,7 +45,7 @@ currency_select = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'
 ### Pytanie: czy potrzebne
 bitcoin_quotes = pd.read_sql("SELECT * FROM bitcoin ORDER BY last_updated DESC", conndb)
 available_crypto = currency_select['name'].unique()
-offsets = {'quarter': 900, 'hour': 3600, '4hours': 14400, 'day': 86400, 'week': 604800}
+offsets = {'hour': 3600, '4hours': 14400, 'day': 86400, 'week': 604800, 'month': 2592000}
 offset = 'day'
 date_marks = {}
 
