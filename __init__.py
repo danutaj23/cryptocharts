@@ -45,6 +45,9 @@ currency_select = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'
 ### Pytanie: czy potrzebne
 bitcoin_quotes = pd.read_sql("SELECT * FROM bitcoin ORDER BY last_updated DESC", conndb)
 available_crypto = currency_select['name'].unique()
+offsets = {'quarter': 900, 'hour': 3600, '4hours': 14400, 'day': 86400, 'week': 604800}
+offset = 'day'
+date_marks = {}
 
 ### Pytanie: czy potrzebne
 bitcoin_quotes['date'] = pd.to_datetime(bitcoin_quotes['last_updated'], unit='s', utc=True)
@@ -85,6 +88,17 @@ app.layout = html.Div(children=[
             style={'width': '30%',
                    'display': 'inline-block',
                    'vertical-align': 'middle'}),
+    html.Div([
+        dcc.Dropdown(
+            id='yaxis1-column',
+            options=[{'label': crypto, 'value': crypto} for crypto in available_crypto],
+            value='bitcoin'
+        )
+    ],
+        style={"width": "35%",
+               "display": "inline-block",
+               "margin": "2% 7% 2% 8%"}),
+
     html.Div([html.H3(id='nbp_usd_price')],
              style={'width': '20%',
                     'display': 'inline-block',
@@ -92,7 +106,23 @@ app.layout = html.Div(children=[
                     'text-align': 'right',
                     'vertical-align': 'middle'
                     }),
+    html.Div([
 
+        dcc.Dropdown(
+            id='time-offset',
+            options=[
+                {'label': '15 minutes', 'value': 'quarter'},
+                {'label': '1 hour', 'value': 'hour'},
+                {'label': '4 hours', 'value': '4hours'},
+                {'label': '1 day', 'value': 'day'},
+                {'label': '1 week', 'value': 'week'}
+            ],
+            value='quarter',
+        )
+    ],
+        style={"width": "35%",
+               "display": "inline-block",
+               "margin": "2% 8% 2% 7%"}),
     html.Div([
         dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False})
         ],),
@@ -158,33 +188,61 @@ style={'backgroundColor': '#FFFEFE',
 
 
 @app.callback(Output('live-graph', 'figure'),
-              [Input(component_id='yaxis-column', component_property='value')],
+              [Input(component_id='yaxis-column', component_property='value'),
+               Input(component_id='yaxis1-column', component_property='value'),
+               Input(component_id='time-offset', component_property='value')],
               events=[Event('graph-update', 'interval')])
-def update_graph_scatter(selected_crypto):
-    try:
-        conndb = sqlite3.connect(db_file)
-        query = 'SELECT * FROM ' + selected_crypto + ' ORDER BY last_updated DESC'
-        all_currencies_data = pd.read_sql(query, conndb)
-        all_currencies_data.sort_values('last_updated', inplace=True)   # sortowanie wg czasu ## TODO do sprawdzenia czy jest wymagane
-        all_currencies_data['date'] = pd.to_datetime(all_currencies_data['last_updated'], unit='s', utc=True)  # zmiana timestampa na czas
-        all_currencies_data['date'] = all_currencies_data['date'] + pd.Timedelta('02:00:00')
-        #all_currencies_data['date'] = all_currencies_data['date'].tz_convert('Asia/Kolkata')
-        all_currencies_data.set_index('date', inplace=True)
-        X = all_currencies_data.index[-100:]
-        Y = all_currencies_data.price_usd.values[-100:]
-        data = plotly.graph_objs.Scatter(
-            x=X,
-            y=Y,
-            name='Scatter',
-            mode='lines+markers'
-        )
-        return{'data': [data], 'layout': go.Layout(xaxis={'range': [min(X), max(X)], 'title': 'Czas'},#, 'tickformat': '%m/%d:%H'},https://community.plot.ly/t/how-to-make-the-messy-date-ticks-organized/7477/3
-                                                   yaxis={'range': [min(Y), max(Y)], 'title': 'Wartość w $'}), }
-    except Exception as e:
-        with open('errors.txt', 'a') as error_log:
-            error_log.write(str(datetime.datetime.fromtimestamp(time.time())) + ': ' + str(e))
-            error_log.write('\n')
-            error_log.close()
+def update_graph_scatter(selected_crypto1, selected_crypto2, date_scope):
+    offset = offsets[date_scope]
+    conn = sqlite3.connect(db_file)
+    query1 = "SELECT * FROM " + selected_crypto1 + " ORDER BY last_updated DESC"
+    query2 = "SELECT * FROM " + selected_crypto2 + " ORDER BY last_updated DESC"
+    query_name1 = "SELECT name FROM " + selected_crypto1 + " LIMIT 1"
+    query_name2 = "SELECT name FROM " + selected_crypto2 + " LIMIT 1"
+    all_currencies_data1 = pd.read_sql(query1, conn)
+    all_currencies_data2 = pd.read_sql(query2, conn)
+    currency_name1 = pd.read_sql(query_name1, conn)
+    currency_name2 = pd.read_sql(query_name2, conn)
+    all_currencies_data1.sort_values('last_updated', inplace=True) # sortowanie danych wg. czasu
+    all_currencies_data2.sort_values('last_updated', inplace=True) # sortowanie danych wg. czasu
+    updates_times1 = all_currencies_data1['last_updated']
+    updates_times2 = all_currencies_data2['last_updated']
+    oldest_record1 = updates_times1.max() - offset if updates_times1.max() - offset > updates_times1.min() else updates_times1.min()
+    oldest_record2 = updates_times2.max() - offset if updates_times2.max() - offset > updates_times2.min() else updates_times2.min()
+
+    scoped_currencies1 = all_currencies_data1.loc[all_currencies_data1['last_updated'] > oldest_record1]
+    scoped_currencies2 = all_currencies_data2.loc[all_currencies_data2['last_updated'] > oldest_record2]
+    scoped_currencies1['date'] = pd.to_datetime(updates_times1, unit='s', utc=True) #zamiana unix_na datę-czas
+    scoped_currencies2['date'] = pd.to_datetime(updates_times2, unit='s', utc=True) #zamiana unix_na datę-czas
+
+    scoped_currencies1.set_index('date', inplace=True) #dodanie lidexu na datę-czas
+    scoped_currencies2.set_index('date', inplace=True) #dodanie lidexu na datę-czas
+    X = scoped_currencies1.index
+    X1 = scoped_currencies2.index
+    Y = scoped_currencies1.price_usd.values
+    Y1 = scoped_currencies2.price_usd.values
+
+    data = plotly.graph_objs.Scatter(
+        x=X,
+        y=Y,
+        name=str(currency_name1['name'][0]),
+        mode='lines+markers'
+    )
+    data1 = plotly.graph_objs.Scatter(
+        x=X1,
+        y=Y1,
+        name=str(currency_name2['name'][0]),
+        mode='lines+markers',
+        yaxis='y2'
+    )
+
+    return {'data': [data, data1], 'layout': go.Layout(
+        xaxis=dict(range=[min(X), max(X)]),
+        #yaxis=dict(range=[min(min(Y),min(Y1)), max(max(Y),max(Y1))], title='price'),
+        yaxis=dict(range=[min(Y), max(Y)], title='Cena ' + str(currency_name1['name'][0])),
+        yaxis2=dict(range=[min(Y1), max(Y1)], title='Cena ' + str(currency_name1['name'][0]), overlaying='y', side='right'),
+        margin={'l': 70, 'b': 35, 't': 30, 'r': 50},
+    )}
 
 @app.callback(
     Output(component_id='nbp_usd_price', component_property='children'),
