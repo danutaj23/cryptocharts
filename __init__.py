@@ -177,6 +177,25 @@ app.layout = html.Div(children=[
                 "display": "inline-block",
                 'vertical-align': 'top'}),
 
+    html.Div([
+        html.P('Strona korzysta z danych udostępnianych przez:'),
+        html.A('Narodowy Bank Polski, ',
+               href='http://www.nbp.pl/',
+               target='blank'),
+        html.A('CoinMarketCup',
+               href='https://coinmarketcap.com/',
+               target='blank'),
+    ]),
+
+    html.Div([
+        html.P('Copyrights 2018 by CryptoChartsTeam (SPIO 2018)'),
+        html.A('GitHub',
+               href='https://github.com/spio2018/cryptocharts',
+               target='blank'),
+    ],
+        style={'text-align': 'center'}
+    )
+
 ],
 style={'backgroundColor': '#FFFEFE',
        'fontFamily': 'Calibri',
