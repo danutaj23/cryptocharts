@@ -75,7 +75,7 @@ app.layout = html.Div(children=[
     html.Div([
         html.H3('Wybierz kryptowalutę '
                 )],
-            style={'width': '30%',
+            style={'width': '20%',
                 'display': 'inline-block',
                 'margin': '1% 1% 1% 1%',
                 'text-align': 'right',
@@ -83,50 +83,61 @@ app.layout = html.Div(children=[
                 }),
 
     html.Div([
-        dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value': crypto} for crypto in available_crypto], value='bitcoin')
+        dcc.Dropdown(id='yaxis-column', options=[{'label': crypto, 'value': crypto} for crypto in available_crypto],
+                     value='bitcoin', clearable=False,)
             ],
-            style={'width': '30%',
+            style={'width': '20%',
                    'display': 'inline-block',
                    'vertical-align': 'middle'}),
+    html.Div([
+        html.H3('Wybierz kryptowalutę do porównania '
+                )],
+        style={'width': '20%',
+               'display': 'inline-block',
+               'margin': '1% 1% 1% 1%',
+               'text-align': 'right',
+               'vertical-align': 'middle'
+               }),
     html.Div([
         dcc.Dropdown(
             id='yaxis1-column',
             options=[{'label': crypto, 'value': crypto} for crypto in available_crypto],
-            value='bitcoin'
+            value='',
+            placeholder="Wybierz kryptowalutę"
         )
     ],
-        style={"width": "35%",
+        style={"width": "20%",
                "display": "inline-block",
-               "margin": "2% 7% 2% 8%"}),
+               'vertical-align': 'middle'}),
 
     html.Div([html.H3(id='nbp_usd_price')],
              style={'width': '20%',
-                    'display': 'inline-block',
                     'margin': '1% 1% 1% 2%',
                     'text-align': 'right',
                     'vertical-align': 'middle'
                     }),
+
+    html.Div([
+        dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False})
+        ],),
+    dcc.Interval(id='graph-update', interval=30*1000),
     html.Div([
 
         dcc.Dropdown(
             id='time-offset',
             options=[
-                {'label': '15 minutes', 'value': 'quarter'},
-                {'label': '1 hour', 'value': 'hour'},
-                {'label': '4 hours', 'value': '4hours'},
-                {'label': '1 day', 'value': 'day'},
-                {'label': '1 week', 'value': 'week'}
+                {'label': '1 godzina', 'value': 'hour'},
+                {'label': '4 godziny', 'value': '4hours'},
+                {'label': '1 dzień', 'value': 'day'},
+                {'label': '1 tydzień', 'value': 'week'},
+                {'label': '1 miesiąc', 'value': 'month'},
             ],
-            value='quarter',
+            value='hour',
+            clearable=False,
         )
     ],
         style={"width": "35%",
-               "display": "inline-block",
                "margin": "2% 8% 2% 7%"}),
-    html.Div([
-        dcc.Graph(id='live-graph', animate=False, config={'displayModeBar': False})
-        ],),
-    dcc.Interval(id='graph-update', interval=30*1000),
     html.Div([html.Div('Średnia cena dolara: '+ str(usd_price()[0]) +' PLN'),
               html.Div(' Według kursu NBP z dnia: ' +str(usd_price()[1]))],
         style={'text-align': 'center', 'font-weight': 'bold'}
@@ -200,7 +211,7 @@ app.layout = html.Div(children=[
 style={'backgroundColor': '#FFFEFE',
        'fontFamily': 'Calibri',
        'color': '#354B5E',
-       'width': '84%',
+       'width': '95%',
        'marginLeft': 'auto',
        'marginRight': 'auto'}
 )
@@ -231,7 +242,7 @@ def update_graph_scatter(selected_crypto1, selected_crypto2, date_scope):
             x=X1,
             y=Y1,
             name=str(currency_name1['name'][0]),
-            mode='lines+markers'
+            mode='lines'
         )
     if (selected_crypto2):
         query2 = "SELECT * FROM " + selected_crypto2 + " ORDER BY last_updated DESC"
@@ -250,7 +261,7 @@ def update_graph_scatter(selected_crypto1, selected_crypto2, date_scope):
             x=X2,
             y=Y2,
             name=str(currency_name2['name'][0]),
-            mode='lines+markers',
+            mode='lines',
             yaxis='y2'
         )
     conn.close()
