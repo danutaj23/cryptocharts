@@ -204,7 +204,7 @@ app.layout = html.Div(children=[
                href='http://www.nbp.pl/',
                target='blank'),
         ', ',
-        html.A('CoinMarketCup',
+        html.A('CoinMarketCap',
                href='https://coinmarketcap.com/',
                target='blank'),
         '.'
