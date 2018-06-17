@@ -110,11 +110,19 @@ app.layout = html.Div(children=[
                "display": "inline-block",
                'vertical-align': 'middle'}),
 
-    html.Div([html.H3(id='nbp_usd_price')],
-             style={'width': '20%',
-                    'margin': '1% 1% 1% 2%',
+    html.Div([html.H4(id='nbp_usd_price1')],
+             style={'width': '35%',
+                    'margin': '-3% 1% 1% 2%',
                     'text-align': 'right',
-                    'vertical-align': 'middle'
+                    'vertical-align': 'text-top',
+                    "display": "inline-block"
+                    }),
+    html.Div([html.H4(id='nbp_usd_price2')],
+             style={'width': '35%',
+                    'margin': '-3% 1% 1% 2%',
+                    'text-align': 'right',
+                    'vertical-align': 'text-top',
+                    "display": "inline-block"
                     }),
 
     html.Div([
@@ -286,7 +294,7 @@ def update_graph_scatter(selected_crypto1, selected_crypto2, date_scope):
         )}
 
 @app.callback(
-    Output(component_id='nbp_usd_price', component_property='children'),
+    Output(component_id='nbp_usd_price1', component_property='children'),
     [Input(component_id='yaxis-column', component_property='value')]
 )
 def update_value(cryptocurrency):
@@ -297,6 +305,22 @@ def update_value(cryptocurrency):
     c.close()
     conn.close()
     return 'Aktualny kurs: {} $, {} PLN'.format(round(data[0][0],3), round(data[0][0]*usd_price()[0], 3))
+
+@app.callback(
+    Output(component_id='nbp_usd_price2', component_property='children'),
+    [Input(component_id='yaxis1-column', component_property='value')]
+)
+def update_value2(cryptocurrency):
+    try:
+        conn = sqlite3.connect(db_file)
+        c = conn.cursor()
+        c.execute("SELECT price_usd FROM " + cryptocurrency + " ORDER BY last_updated DESC limit 1")
+        data = c.fetchall()
+        c.close()
+        conn.close()
+        return 'Aktualny kurs: {} $, {} PLN'.format(round(data[0][0],3), round(data[0][0]*usd_price()[0], 3))
+    except:
+        pass
 
 #### PROD ####
 if server_type == 'PROD':
