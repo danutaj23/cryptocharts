@@ -36,11 +36,17 @@ Niniejsza instrukcja ma za zadanie wprowadzić użytkownika w naszą aplikację 
 
 W celu uruchomienia aplikacji wymagane jest dowolne urządzenie z systemem operacyjnym Windows lub Linux, obsługujące połączenie internetowe oraz dowolna przeglądarka internetowa.
 
-  
+ **Specyfikacja systemowa**
+
+- Windows 10 
+- Google Chrome 67.0.3396.87
+- Firefox 60.0.02
+- Rozdzielczość co najmniej 1024x768
+
 
 **W celu uruchomienia aplikacji należy:**
 
- - Uruchomić dowolną przeglądarkę internetową
+ - Uruchomić jedna z wspieranych przeglądarek 
  - Wpisać adres strony **http://80.211.194.119/**
 
   
