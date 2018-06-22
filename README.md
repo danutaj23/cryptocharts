@@ -61,35 +61,45 @@ Wykres przedstawia zmiany wartości wybranej przez użytkownika kryptowaluty. Wy
 
 Wykres liniowy jest najczęściej występującym wykresem w analizach ekonomicznych i giełdowych. Najważniejszą jego zaletą jest intuicyjna postać prezentacji danych względem analizowanych okresów czasu.
 
-![enter image description here](https://lh3.googleusercontent.com/md27TMTjlCuOu2Fs31Pq8HERY7FjMNLMSMZldSMT6u_HdCKgBqwxUFWMNA-s7dgQbU5IZn-iAoo)
+![enter image description here](https://lh3.googleusercontent.com/37iPKQ3mzmQHYbwcNkyBptnfU8arc9cjjdhCdp_ucfDptT-15w-rQscHhKTdzeCPnRIZZCli7Wo)
 
-Program oferuje podstawową funkcjonalność w postaci notowań stu kryptowalut na wykresie liniowym, na przestrzeni ostatnich 500 minut w interwale 5 minutowym.
+Program oferuje podstawową funkcjonalność w postaci notowań wszystkich istniejących kryptowalut na wykresie liniowym, na przestrzeni czasu do ostatniego miesiąca.
 
 ***2.  Wybór kryptowaluty***
 
-Aplikacja daje możliwość analizy notowań dla stu najpopularniejszych kryptowalut.
+Aplikacja daje możliwość analizy notowań dla wszystkich istniejących kryptowalut. Użutkownik może wybrać z rozwijanej listy interesującą go kryptowalutę. 
 
-![enter image description here](https://lh3.googleusercontent.com/OQP22k8ZJak2fxUGgVCzEendxWzWGFh1vjzzQdCB9ois8HanAqbkv54tBfsprJCR8Jqj0eGIHXg)
+![enter image description here](https://lh3.googleusercontent.com/Qgt121792-G1UgStNTIMq1tNj0Cs1kOUqMOhcoQHOMrTYVf9FoIVg-Fa9Jg1cHprRCMt_q6KCSE)
 
-Użutkownik może wybrać z rozwijanej listy interesującą go kryptowalutę.
-Przy wyborze interesującej kryptowaluty użytkownik w bardzo szybko otrzymuje informację o bieżącej cenie wybranej przez siebie kryptowaluty zarówno w dolarach jak i w złotówkach:
+Po wyborze interesującej kryptowaluty użytkownik w bardzo szybko otrzymuje informację o bieżącej cenie wybranej przez siebie kryptowaluty zarówno w dolarach jak i w złotówkach:
 
-![enter image description here](https://lh3.googleusercontent.com/WjeVItCusoKkk_hbgxBL0g9kNcVfkc91QFxQTX6e2lyQVTQCqi5h8UExw7CO4gcUg_kivDoEm6Q)
+![enter image description here](https://lh3.googleusercontent.com/QNmJQOi0w7D7A0wSLkt13HmiTGgZiFtN-OPREwk28O4aBWqQWFxr7Czf3yyVImZvkDhsCp8lSQw)
 
 Na wykresie użytkownik ma możliwość podświetlenia konkretnego punktu czasowego, który pokazuje dokładną datę notowania wraz z wartością.
 
-![enter image description here](https://lh3.googleusercontent.com/6PDMIjieVR5XTZxg22UbPpQV7HvVorwCqxYUumCZWocdOfOrtHfPutZNVF__xs6BydrnYSR0kZQ)
+![enter image description here](https://lh3.googleusercontent.com/VY5sEnS837BDo7YKHI82Ij6arALqSo6ivl6HzUYO6A56deitdT302vxnGuIWPFul--eDQ7BcPAE)
 
-***3. Bieżący kurs dolara***
+***3. Porównanie kryptowalut***
+Aplikacja zapewnia możliwość porównania dwóch interesujących użytkownika kryptowalut. Na wykresie liniowym zostaje wyświetlony wykres dla obu kryptowalut.
+
+![enter image description here](https://lh3.googleusercontent.com/v3arKNKFriYaRm1ujxF6s2z1VVsQJE-r0ptFXVgOSURkUvtm2flT3MH9az699d2PSX7ZXVDsknI)
+
+***4. Bieżący kurs dolara***
 	
 Aby polski użytkownik miał możliwość lepszego zobrazowania wartości kryptowalut, aplikacja daje możliwość podglądu średniego kursu dolara w złotówkach.
 	
-![enter image description here](https://lh3.googleusercontent.com/suBript6b1IpMdwziCatg8j-ZSGNpjJ7ZKiphrcU0VKtPaTiFmGfZpKdFBYVAQFlrqUhjgzB1I4)
+![enter image description here](https://lh3.googleusercontent.com/gfYs-zT1pEBrk9EDpK25lAhjCWiZiAMxD-Ajo3KWjBwP-xcpHM3azuHnVqpdkwF0LnHphV4Uxn0)
 
 Transakcje na rynku kryptowalut zawierane są za pośrednictwem dolarów, jednak aby mieć pełen obraz potencjalnej inwestycji, użytkownik otrzymuje możliwość przeliczenia bieżącego kursu.
 
-***4. Porady***
+***5. Interwał czasowy***
+
+Użytkownik ma możłiwość dostosowania interwału czasowego do swoich potrzeb - 1 godzina, 4 godziny, 1 dzień, 1 tydzień, 1 miesiąc.
+
+![enter image description here](https://lh3.googleusercontent.com/yj9x4XJlpEbRqTaJfO7tshyZ-vxfiguYD2LNmTnrfAHNM7tHoP1ZhYMROSxK47OnVTtpPcBagUo)
+
+***6. Porady***
 
 Aplikacja zapewnia wsparcie merytoryczne dla użytkownika. Ma on możliwość uzyskania szczegółowej wiedzy na temat kryptowalut - czym są, jakie są regulacje prawne na świecie oraz jakie są opinie środowisk ekonomicznych na ich temat.
 	
-![enter image description here](https://lh3.googleusercontent.com/JG7v_Vq1CQtGyn3g5f6kaKmiH8YeOV7Sym6Q_3Lwl0tK2ajH545xzxxgg06pzKFddcQQ16fRB9o)
+![enter image description here](https://lh3.googleusercontent.com/WxF0u1D99K36vZoAVA41KtB11CaZzX1z6TXpnOp8vfFGa-o6iAjUcaANei9SbuQXv9NrafAFvZI)
